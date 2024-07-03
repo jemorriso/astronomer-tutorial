@@ -118,7 +118,6 @@ def find_the_iss():
         return r
 
     log_iss_location_obj = log_iss_location(get_iss_coordinates.output)
-
     chain(github_sensor, get_iss_coordinates, log_iss_location_obj)
 
 
