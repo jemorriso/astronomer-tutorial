@@ -1,27 +1,28 @@
 """
 ## Find the International Space Station
 
-This DAG waits for a specific commit message to appear in a GitHub repository, 
+This DAG waits for a specific commit message to appear in a GitHub repository,
 and then will pull the current location of the International Space Station from an API
 and print it to the logs.
 
-This DAG needs a GitHub connection with the name `my_github_conn` and 
+This DAG needs a GitHub connection with the name `my_github_conn` and
 an HTTP connection with the name `open_notify_api_conn`
 and the host `https://api.open-notify.org/` to work.
 
-Additionally you will need to set an Airflow variable with 
+Additionally you will need to set an Airflow variable with
 the name `open_notify_api_endpoint` and the value `iss-now.json`.
 """
 
+import logging
+from typing import Any
+
 from airflow.decorators import dag, task
-from airflow.models.baseoperator import chain
-from airflow.providers.http.operators.http import HttpOperator
-from airflow.providers.github.sensors.github import GithubSensor
 from airflow.exceptions import AirflowException
 from airflow.models import Variable
+from airflow.models.baseoperator import chain
+from airflow.providers.github.sensors.github import GithubSensor
+from airflow.providers.http.operators.http import HttpOperator
 from pendulum import datetime
-from typing import Any
-import logging
 
 task_logger = logging.getLogger("airflow.task")
 
@@ -67,7 +68,6 @@ def commit_message_checker(repo: Any, trigger_message: str) -> bool | None:
     tags=["Connections"],
 )
 def find_the_iss():
-
     github_sensor = GithubSensor(
         task_id="example_sensor",
         github_conn_id="my_github_conn",
@@ -95,8 +95,9 @@ def find_the_iss():
         Returns:
             dict: The JSON response from the API call to the Reverse Geocode API.
         """
-        import requests
         import json
+
+        import requests
 
         location_dict = json.loads(location)
 
