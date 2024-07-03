@@ -15,6 +15,7 @@ apache-airflow==2.9.2
     #   apache-airflow-providers-common-sql
     #   apache-airflow-providers-fab
     #   apache-airflow-providers-ftp
+    #   apache-airflow-providers-github
     #   apache-airflow-providers-http
     #   apache-airflow-providers-imap
     #   apache-airflow-providers-smtp
@@ -29,6 +30,8 @@ apache-airflow-providers-fab==1.2.0
     # via apache-airflow
 apache-airflow-providers-ftp==3.10.0
     # via apache-airflow
+apache-airflow-providers-github==2.6.2
+    # via -r local-requirements.in
 apache-airflow-providers-http==4.12.0
     # via apache-airflow
 apache-airflow-providers-imap==3.6.1
@@ -65,7 +68,9 @@ certifi==2024.6.2
     #   httpx
     #   requests
 cffi==1.16.0
-    # via cryptography
+    # via
+    #   cryptography
+    #   pynacl
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
@@ -88,7 +93,9 @@ cron-descriptor==1.4.3
 croniter==2.0.5
     # via apache-airflow
 cryptography==42.0.8
-    # via apache-airflow
+    # via
+    #   apache-airflow
+    #   pyjwt
 deprecated==1.2.14
     # via
     #   apache-airflow
@@ -96,6 +103,7 @@ deprecated==1.2.14
     #   opentelemetry-api
     #   opentelemetry-exporter-otlp-proto-grpc
     #   opentelemetry-exporter-otlp-proto-http
+    #   pygithub
 dill==0.3.8
     # via apache-airflow
 dnspython==2.6.1
@@ -302,6 +310,8 @@ psutil==6.0.0
     # via apache-airflow
 pycparser==2.22
     # via cffi
+pygithub==2.3.0
+    # via apache-airflow-providers-github
 pygments==2.18.0
     # via
     #   apache-airflow
@@ -311,6 +321,9 @@ pyjwt==2.8.0
     #   apache-airflow
     #   flask-appbuilder
     #   flask-jwt-extended
+    #   pygithub
+pynacl==1.5.0
+    # via pygithub
 python-daemon==3.0.1
     # via apache-airflow
 python-dateutil==2.9.0.post0
@@ -346,6 +359,7 @@ requests==2.32.3
     #   apache-airflow-providers-http
     #   connexion
     #   opentelemetry-exporter-otlp-proto-http
+    #   pygithub
     #   requests-toolbelt
 requests-toolbelt==1.0.0
     # via apache-airflow-providers-http
@@ -407,6 +421,7 @@ typing-extensions==4.12.2
     #   flask-limiter
     #   limits
     #   opentelemetry-sdk
+    #   pygithub
 tzdata==2024.1
     # via pendulum
 uc-micro-py==1.0.3
@@ -416,7 +431,9 @@ unicodecsv==0.14.1
 universal-pathlib==0.2.2
     # via apache-airflow
 urllib3==2.2.2
-    # via requests
+    # via
+    #   pygithub
+    #   requests
 werkzeug==2.2.3
     # via
     #   apache-airflow
